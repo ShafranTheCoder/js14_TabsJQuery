@@ -1,14 +1,12 @@
 'use strict';
 
-let tabs = document.querySelectorAll('.tabs li');
+(function($) {
+    $(function() {
+        $('ul.tabs').on('click', 'li:not(.active)', function() {
+            $(this)
+                .addClass('active').siblings().removeClass('active');
+                $('ul.tabs-content').find('li.tab-content').removeClass('is-open').eq($(this).index()).addClass('is-open');
+        });
 
-tabs.forEach(function(tab, index){
-    tab.addEventListener('click', function(){
-        let currentTabData = document.querySelector('.tab-content[data-tab-content="' + this.dataset.tabTrigger + '"]');
-
-        document.querySelector('.tabs-content li.is-open').classList.remove('is-open');
-        document.querySelector('.tabs li.active').classList.remove('active');
-        currentTabData.classList.add('is-open');
-        this.classList.add('active');
     });
-});
+})(jQuery);
